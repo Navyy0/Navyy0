@@ -15,7 +15,7 @@
 - 💬 Ask me about **Full-Stack Development (MERN & Next.js), Database Design (Prisma, MongoDB, SQL), AI Chatbots**  
 - 📫 Reach me at **navyanshr@gmail.com**  
 - 📄 [View My Resume](https://github.com/Navyy0/resume/blob/main/Navyansh_Raj.pdf)  
-- ⚡ Fun fact: **I once led a team to win a hackathon by reducing ICU wait times with AI**  
+ 
 
 ---
 
