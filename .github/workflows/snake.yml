@@ -1,9 +1,15 @@
 name: Generate Snake
 
 on:
-  schedule: # Runs once a day
+  schedule: # Runs once a day at midnight UTC
     - cron: "0 0 * * *"
-  workflow_dispatch: # Allows manual run from GitHub Actions tab
+  workflow_dispatch: # Allow manual trigger
+  push: # Also run on every push to main
+    branches:
+      - main
+
+permissions:
+  contents: write  # Needed to allow pushing to output branch
 
 jobs:
   build:
@@ -12,11 +18,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Generate Snake
-        uses: Platane/snk/svg-only@v3
+      - name: Generate Snake (SVG + GIF)
+        uses: Platane/snk@v3
         with:
           github_user_name: navyy0
-          outputs: dist/github-contribution-grid-snake.svg
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake.gif
+
+      - name: Install gifsicle (for GIF compression)
+        run: sudo apt-get install -y gifsicle
+
+      - name: Optimize GIF
+        run: gifsicle -O3 dist/github-contribution-grid-snake.gif -o dist/github-contribution-grid-snake.gif
 
       - name: Push Snake Animation to Output Branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
